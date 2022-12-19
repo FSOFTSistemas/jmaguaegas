@@ -1,0 +1,39 @@
+.busca {
+    padding-bottom: 15px; 
+}
+
+.menu_busca {
+    display: flex;
+    justify-content: center;
+}
+
+.buscar_data {
+    margin-bottom: 0;
+    width: 900px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.lbl {
+    margin: 10px 6px 0 0;
+    font-size: 20px;
+    color: #000000;
+}
+
+#dia {
+    padding: 4px; 
+    margin-right: 10px;
+}
+ 
+.btn_filtro {
+    color: #ffffff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.separador {
+    margin-bottom: 10px;
+    width: 100%;
+    height: 5px;
+    background-color: lightgray;
+ }
