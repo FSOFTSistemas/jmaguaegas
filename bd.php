@@ -12,5 +12,3 @@
     }catch(PDOException $erro){
         //echo "<h1>Erro ao conectar </h1>";
     }
-
-?>
