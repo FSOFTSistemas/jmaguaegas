@@ -17,7 +17,7 @@ $ped = new InserirProduto;
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
    <!-- site metas -->
-   <title>KIKO ÁGUA/GÁS</title>
+   <title>JM ÁGUA E GÁS</title>
    <meta name="keywords" content="">
    <meta name="description" content="">
    <meta name="author" content="">
@@ -70,7 +70,7 @@ $ped = new InserirProduto;
          <div class="container">
             <div class="row">
                <div class="col-sm-12">
-                  <div class="logo"><a href="home.php"><img src="images/logo.png"></a></div>
+                  <div class="logo"><a href="home.php"><img src="images/JM.png" width="180px"></a></div>
                </div>
             </div>
          </div>
@@ -279,21 +279,6 @@ $ped = new InserirProduto;
   </div>
 </div>
 
-   <!-- fashion section end  action="update_produto.php" enctype="multipart/form-data" -->
-   <!-- footer section start -->
-   <div class="footer_section layout_padding">
-      <div class="container">
-         <div class="footer_logo"><a href="home.php"><img src="images/footer-logo.png"></a></div>
-      </div>
-   </div>
-   <!-- footer section end -->
-   <!-- copyright section start -->
-   <div class="copyright_section">
-      <div class="container">
-         <p class="copyright_text">© 2021 All Rights Reserved. Design by <a href="https://html.design">FSOFT Sistmas.</a></p>
-      </div>
-   </div>
-   <!-- copyright section end -->
    <!-- Javascript files-->
    <script src="js/jquery.min.js"></script>
    <script src="js/popper.min.js"></script>

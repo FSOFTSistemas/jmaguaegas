@@ -70,7 +70,7 @@ $ped = new InserirUsuario;
          <div class="container">
             <div class="row">
                <div class="col-sm-12">
-                  <div class="logo"><a href="home.php"><img src="images/logo.png"></a></div>
+                  <div class="logo"><a href="home.php"><img src="images/JM.png" width="180px"></a></div>
                </div>
             </div>
          </div>
@@ -279,18 +279,11 @@ $ped = new InserirUsuario;
   </div>
 </div>
 
-   <!-- fashion section end  action="update_usuario.php" enctype="multipart/form-data" -->
-   <!-- footer section start -->
-   <div class="footer_section layout_padding">
-      <div class="container">
-         <div class="footer_logo"><a href="home.php"><img src="images/footer-logo.png"></a></div>
-      </div>
-   </div>
    <!-- footer section end -->
    <!-- copyright section start -->
    <div class="copyright_section">
       <div class="container">
-         <p class="copyright_text">© 2021 All Rights Reserved. Design by <a href="https://html.design">FSOFT Sistemas.</a></p>
+         <p class="copyright_text">© 2021 All Rights Reserved. Design by <a href="https://f-softsistemas.com.br/">FSOFT Sistemas.</a></p>
       </div>
    </div>
    <!-- copyright section end -->

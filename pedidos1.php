@@ -87,7 +87,7 @@ if(isset($_POST['Entregador'])){
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="logo"><a href="home.php"><img src="images/logo.png"></a></div>
+                        <div class="logo"><a href="home.php"><img src="images/JM.png" width="180px"></a></div>
                     </div>
                 </div>
             </div>
@@ -168,9 +168,9 @@ if(isset($_POST['Entregador'])){
                             <ul>
                                 <?php
                                 if (empty($data1) && empty($data2)) {
-                                    $consulta = $PDO->prepare("SELECT * FROM Entrega WHERE entregador <> '' ORDER by entregador LIMIT 50");
+                                    $consulta = $PDO->prepare("SELECT * FROM Entrega WHERE entregador <> '' ORDER by id desc LIMIT 20");
                                 } else {
-                                    $consulta = $PDO->prepare("SELECT * FROM Entrega WHERE DATE(data) between '" . $data1 . "%' AND '" . $data2 . "%' AND entregador = '" . $entregador1 . "' ORDER BY entregador");
+                                    $consulta = $PDO->prepare("SELECT * FROM Entrega WHERE DATE(data) between '" . $data1 . "%' AND '" . $data2 . "%' AND entregador = '" . $entregador1 . "' ORDER BY id desc");
                                 }
                                 $consulta->execute();
                                 while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
@@ -183,11 +183,16 @@ if(isset($_POST['Entregador'])){
                                                         <div class="nearby-user">
                                                             <div class="row">
                                                                 <div class="col-md-2 col-sm-2">
-                                                                    <img src="images/entrega.png" class="profile-photo-lg">
+                                                                    <img src="images/JM.png" width="40px" class="profile-photo-lg">
                                                                 </div>
                                                                 <div class="col-md-7 col-sm-7">
                                                                     <h5>Pedido - entregador: <?php echo $linha['entregador']; ?> <?php echo date("d-m-Y", strtotime($linha['data'])); ?></h5>
                                                                     <h3 id="descricao"><?php echo $linha['descricao']; ?></h3>
+                                                                </div>
+                                                                 <div class="col-md-3 col-sm-3">
+                                                                    <br>
+                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                    <a class="btn btn-success" style="color:white" target="_blank" href="cupom.php?id=<?php echo $linha['id'] ?>">Imprimir</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -216,7 +221,7 @@ if(isset($_POST['Entregador'])){
     <!-- footer section start -->
     <div class="footer_section layout_padding">
         <div class="container">
-            <div class="footer_logo"><a href="home.php"><img src="images/footer-logo.png"></a></div>
+            <div class="footer_logo"><a href="home.php"><img src="images/JM.png" width="90px"></a></div>
         </div>
     </div>
 
