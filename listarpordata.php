@@ -1,5 +1,5 @@
 <?php 
-    require_once "cbd.php";
+    require_once 'Conexao.php';
     date_default_timezone_set('America/Sao_Paulo');
 
     class ListarPedidos {
@@ -31,7 +31,7 @@
 
         public function listarTudosPedidosEntregues($dados) {
             try {
-                $PDO = ConexaoBancoDados::conexao();
+                $PDO = Conexao::getInstance();
 
                 if($dados['nome'] == 'admin') {
                     $consulta = $PDO->prepare(self::CONSULTA_ENTREGADOR_ADMIN);
@@ -42,7 +42,7 @@
                 
                 return $consulta->fetchAll(PDO::FETCH_ASSOC);
 
-            } catch(PDException $e) {
+            } catch(PDOException $e) {
                 echo 'Error: '.$e->getMessage();
             }  
 
@@ -54,8 +54,3 @@
 
     $exemplo = $obj->listarTodosPedidos();
     var_dump($exemplo);
-    
-    
-
-
-?>

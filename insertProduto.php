@@ -4,11 +4,11 @@
         class InserirProduto{
 
             public function inserir($nome, $preco, $estoque){
-                include "bd.php";
+                require_once 'Conexao.php';
                 
                 $sql_insert = "INSERT INTO Produto(nome, preco, estoque) VALUES (:NOME, :PRECO, :ESTOQUE)";
 
-                $stmt = $PDO->prepare($sql_insert);
+                $stmt = Conexao::getInstance()->prepare($sql_insert);
                 
                 $stmt->bindParam(':NOME', $nome);
                 $stmt->bindParam(':PRECO', $preco);
@@ -29,6 +29,3 @@
 
         
     }
-    ?>
-
-

@@ -1,15 +1,12 @@
 <?php
 
-include "bd.php";
+require_once 'Conexao.php';
 
 $id = $_POST['id'];
 $status = "Excluido";
 
 try {
-        $usuario = "u114975982_kikogasbd";
-        $senha = "Benicio01";
-        $pdo = new PDO('mysql:host=127.0.0.1;dbname=u114975982_kikogasbd', $usuario, $senha);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo = Conexao::getInstance();
         //preparo minha query
         $stmt = $pdo->prepare('UPDATE Entrega SET status = :excluido WHERE id = :pid');
         //executo o comando da query passando como parâmetro minhas variáveis
@@ -24,4 +21,3 @@ try {
 
   echo 'Error: ' . $e->getMessage();
 }
-?>

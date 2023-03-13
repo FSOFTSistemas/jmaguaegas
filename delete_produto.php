@@ -1,14 +1,11 @@
 <?php
 
-include "bd.php";
+require_once 'Conexao.php';
 
 $id = $_POST['id'];
 
 try {
-        $usuario = "u114975982_kikogasbd";
-        $senha = "Benicio01";
-        $pdo = new PDO('mysql:host=127.0.0.1;dbname=u114975982_kikogasbd', $usuario, $senha);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo = Conexao::getInstance();
 
         $stmt = $pdo->prepare('DELETE FROM Produto WHERE id = :id');
         $stmt->bindParam(':id', $id);
@@ -19,4 +16,3 @@ try {
 } catch(PDOException $e) {
   echo 'Error: ' . $e->getMessage();
 }
-?>

@@ -6,7 +6,7 @@
 
         public function inserir($descricao)
         {
-            include "bd.php";
+            require_once 'Conexao.php';
             $status = "Pendente";
             $entregador = " ";
             $timezone = new DateTimeZone('America/Sao_Paulo');
@@ -15,7 +15,7 @@
 
             $sql_insert = "INSERT INTO Entrega(descricao, status, entregador, data) VALUES (:DESCRICAO, :STATUSS, :ENTREGADOR, :DATA)";
 
-            $stmt = $PDO->prepare($sql_insert);
+            $stmt = Conexao::getInstance()->prepare($sql_insert);
 
             $stmt->bindParam(':DESCRICAO', $descricao);
             $stmt->bindParam(':STATUSS', $status);

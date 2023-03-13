@@ -5,10 +5,10 @@ if (!isset($_SESSION['id'])) {
     exit;
 }
 
-include "bd.php";
+require_once 'Conexao.php';
 $id_usu = $_SESSION['id'];
 $sql = "SELECT * FROM usuario WHERE id ='" . $_SESSION['id'] . "' ";
-$usu = $PDO->prepare($sql);
+$usu = Conexao::getInstance()->prepare($sql);
 $usu->execute();
 $dados = $usu->fetch();
 
@@ -21,9 +21,9 @@ $dados = $usu->fetch();
     $data_atual = $data_atual->format('Y-m-d');
 
     if ($dados['nome'] == 'admin' || $dados['nome'] == 'kiko') {
-        $consulta = $PDO->prepare("SELECT * FROM Entrega WHERE DATE(data) LIKE '" . $data_atual . "%' AND entregador <> '' AND status <> 'Excluido' ORDER BY id DESC");
+        $consulta = Conexao::getInstance()->prepare("SELECT * FROM Entrega WHERE DATE(data) LIKE '" . $data_atual . "%' AND entregador <> '' AND status <> 'Excluido' ORDER BY id DESC");
     } else {
-        $consulta = $PDO->prepare("SELECT * from Entrega WHERE DATE(data) LIKE '" . $data_atual . "%' AND entregador LIKE '" . $dados['nome'] . "' AND status <> 'Excluido' ORDER BY id DESC");
+        $consulta = Conexao::getInstance()->prepare("SELECT * from Entrega WHERE DATE(data) LIKE '" . $data_atual . "%' AND entregador LIKE '" . $dados['nome'] . "' AND status <> 'Excluido' ORDER BY id DESC");
     }
 
     $consulta->execute();
@@ -94,12 +94,12 @@ $dados = $usu->fetch();
     <?php } ?>
 </ul>
 
-    <b>
-        <span>Quantidade de pedidos:
-            <?php
-            print($consulta->rowCount());
-            ?>
-        </span>
+<b>
+    <span>Quantidade de pedidos:
+        <?php
+        print($consulta->rowCount());
+        ?>
+    </span>
     <b>
 
         <?php

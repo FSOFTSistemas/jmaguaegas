@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "bd.php";
+require_once 'Conexao.php';
 require_once 'insertProduto.php';
 $ped = new InserirProduto;
 ?>
@@ -165,48 +165,48 @@ $ped = new InserirProduto;
                               </tr>
                            </thead>
                            <tbody>
-                           <?php
-                           $consulta = $PDO->prepare("SELECT * FROM Produto");
-                           $consulta->execute();
+                              <?php
+                              $consulta = $PDO->prepare("SELECT * FROM Produto");
+                              $consulta->execute();
 
-                           while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                              while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
 
-                           ?>
-                        
-                              <tr>
-                                 <div class="container">
-                                    <div class="row">
-                                       <div class="col-md-8">
-                                          <div class="people-nearby">
-                                             <div class="nearby-user">
-                                                <div class="row">
-                                                   <div class="col-lg-12 col-sm-12">
-                                                      <td id="id"> <?php echo $linha['id']; ?></td>
-                                                     
-                                                      <td id="nome"> <?php echo $linha['nome']; ?></td>
-                                                     
-                                                      <td id="preco"><?php echo $linha['preco']; ?></td>
-                                                     
-                                                      <td id="estoque"><?php echo $linha['estoque']; ?></td>
-                                                    
-                                                      <td>
-                                                      <!-- Button trigger modal -->
-                                                      <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#MyModal2" data-whateverid="<?php echo $linha['id']; ?>" data-whatevernome="<?php echo $linha['nome']; ?>">
-                                                          Exluir</button>
-                                                         <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#exampleModal" data-whateverid="<?php echo $linha['id']; ?>" data-whatevernome="<?php echo $linha['nome']; ?>" data-whateverpreco="<?php echo $linha['preco']; ?>" data-whateverestoque="<?php echo $linha['estoque']; ?>">
-                                                         Alterar</button>
-                                                      </td>
-                                                      
+                              ?>
+
+                                 <tr>
+                                    <div class="container">
+                                       <div class="row">
+                                          <div class="col-md-8">
+                                             <div class="people-nearby">
+                                                <div class="nearby-user">
+                                                   <div class="row">
+                                                      <div class="col-lg-12 col-sm-12">
+                                                         <td id="id"> <?php echo $linha['id']; ?></td>
+
+                                                         <td id="nome"> <?php echo $linha['nome']; ?></td>
+
+                                                         <td id="preco"><?php echo $linha['preco']; ?></td>
+
+                                                         <td id="estoque"><?php echo $linha['estoque']; ?></td>
+
+                                                         <td>
+                                                            <!-- Button trigger modal -->
+                                                            <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#MyModal2" data-whateverid="<?php echo $linha['id']; ?>" data-whatevernome="<?php echo $linha['nome']; ?>">
+                                                               Excluir</button>
+                                                            <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#exampleModal" data-whateverid="<?php echo $linha['id']; ?>" data-whatevernome="<?php echo $linha['nome']; ?>" data-whateverpreco="<?php echo $linha['preco']; ?>" data-whateverestoque="<?php echo $linha['estoque']; ?>">
+                                                               Alterar</button>
+                                                         </td>
+
+                                                      </div>
                                                    </div>
                                                 </div>
                                              </div>
                                           </div>
                                        </div>
                                     </div>
-                                 </div>
-                           </tr>
-                              </tbody>
-                           <?php } ?>
+                                 </tr>
+                           </tbody>
+                        <?php } ?>
 
                      </div>
                   </div>
@@ -215,9 +215,9 @@ $ped = new InserirProduto;
          </div>
       </div>
    </div>
-    
-    <!-- Modal -->
-    <div class="modal fade" id="MyModal2" role="dialog" aria-labelledby="mymodal" aria-hidden="true">
+
+   <!-- Modal -->
+   <div class="modal fade" id="MyModal2" role="dialog" aria-labelledby="mymodal" aria-hidden="true">
       <div class="modal-dialog" role="document">
          <div class="modal-content">
             <div class="modal-header">
@@ -227,17 +227,17 @@ $ped = new InserirProduto;
                </button>
             </div>
             <div class="modal-body">
-            <form method="POST" action="excluir_produto.php" enctype="multipart/form-data">
-               <div class="form-group">
-               <label for="recipient-nome" class="control-label">Nome:</label>
-               <input name="nome" type="text" class="form-control" id="recipient-nome">
-               </div>
-               <input name="id" type="hidden" id="id_produto">
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button><br></br>
-                  <button type="submit" class="btn btn-primary" name="btn_excluir">Sim, Desejo Excluir!</button>
-               </div>
-              </form>
+               <form method="POST" action="excluir_produto.php" enctype="multipart/form-data">
+                  <div class="form-group">
+                     <label for="recipient-nome" class="control-label">Nome:</label>
+                     <input name="nome" type="text" class="form-control" id="recipient-nome">
+                  </div>
+                  <input name="id" type="hidden" id="id_produto">
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button><br></br>
+                     <button type="submit" class="btn btn-primary" name="btn_excluir">Sim, Desejo Excluir!</button>
+                  </div>
+               </form>
             </div>
          </div>
       </div>
@@ -245,39 +245,39 @@ $ped = new InserirProduto;
 
    </table>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Produto</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form method="POST" action="update_produto.php" enctype="multipart/form-data">
-          <div class="form-group">
-            <label for="recipient-nome" class="control-label">Nome:</label>
-            <input name="nome" type="text" class="form-control" id="recipient-nome">
-          </div>
-          <div class="form-group">
-            <label for="recipient-preco" class="control-label">Preço:</label>
-            <input name="preco" type="text" class="form-control" id="recipient-preco">
-          </div>
-          <div class="form-group">
-            <label for="recipient-estoque" class="control-label">Estoque:</label>
-            <input name="estoque" type="text" class="form-control" id="recipient-estoque">
-          </div>
-          <input name="id" type="hidden" id="id_produto">
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-danger">Alterar</button>
+   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Produto</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <form method="POST" action="update_produto.php" enctype="multipart/form-data">
+                  <div class="form-group">
+                     <label for="recipient-nome" class="control-label">Nome:</label>
+                     <input name="nome" type="text" class="form-control" id="recipient-nome">
+                  </div>
+                  <div class="form-group">
+                     <label for="recipient-preco" class="control-label">Preço:</label>
+                     <input name="preco" type="text" class="form-control" id="recipient-preco">
+                  </div>
+                  <div class="form-group">
+                     <label for="recipient-estoque" class="control-label">Estoque:</label>
+                     <input name="estoque" type="text" class="form-control" id="recipient-estoque">
+                  </div>
+                  <input name="id" type="hidden" id="id_produto">
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                     <button type="submit" class="btn btn-danger">Alterar</button>
+                  </div>
+               </form>
+            </div>
          </div>
-        </form>
       </div>
-    </div>
-  </div>
-</div>
+   </div>
 
    <!-- fashion section end  action="update_produto.php" enctype="multipart/form-data" -->
    <!-- footer section start -->
@@ -319,38 +319,38 @@ $ped = new InserirProduto;
    </script>
 
 
-<script type="text/javascript">
-      $('#MyModal2').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var recipientid = button.data('whateverid')
-  var recipientnome = button.data('whatevernome')
-  
+   <script type="text/javascript">
+      $('#MyModal2').on('show.bs.modal', function(event) {
+         var button = $(event.relatedTarget) // Button that triggered the modal
+         var recipientid = button.data('whateverid')
+         var recipientnome = button.data('whatevernome')
 
-  var modal = $(this)
-  modal.find('.modal-title').text('Produto ' + recipientnome)
-  modal.find('#id_produto').val(recipientid)
-  modal.find('#recipient-nome').val(recipientnome)
-})
+
+         var modal = $(this)
+         modal.find('.modal-title').text('Produto ' + recipientnome)
+         modal.find('#id_produto').val(recipientid)
+         modal.find('#recipient-nome').val(recipientnome)
+      })
    </script>
 
 
 
 
    <script type="text/javascript">
-      $('#exampleModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var recipientid = button.data('whateverid')
-  var recipientnome = button.data('whatevernome')
-  var recipientpreco = button.data('whateverpreco') 
-  var recipientestoque = button.data('whateverestoque') 
+      $('#exampleModal').on('show.bs.modal', function(event) {
+         var button = $(event.relatedTarget) // Button that triggered the modal
+         var recipientid = button.data('whateverid')
+         var recipientnome = button.data('whatevernome')
+         var recipientpreco = button.data('whateverpreco')
+         var recipientestoque = button.data('whateverestoque')
 
-  var modal = $(this)
-  modal.find('.modal-title').text('Produto ' + recipientnome)
-  modal.find('#id_produto').val(recipientid)
-  modal.find('#recipient-nome').val(recipientnome)
-  modal.find('#recipient-preco').val(recipientpreco)
-  modal.find('#recipient-estoque').val(recipientestoque)
-})
+         var modal = $(this)
+         modal.find('.modal-title').text('Produto ' + recipientnome)
+         modal.find('#id_produto').val(recipientid)
+         modal.find('#recipient-nome').val(recipientnome)
+         modal.find('#recipient-preco').val(recipientpreco)
+         modal.find('#recipient-estoque').val(recipientestoque)
+      })
    </script>
    <!--
 <script>
@@ -395,30 +395,30 @@ $ped = new InserirProduto;
       });
    </script>
    <script language="javascript" type="text/javascript">
-       function f_mostra() {
-        let nome = "<?php echo $dados['nome'] ?>";
-        let preco = "<?php echo $dados['preco'] ?>";
-        let estoque = "<?php echo $dados['estoque'] ?>";
-        let id = document.querySelector('.span1').textContent;
-    
-        $.post("update_produto.php", {
-            id : id,
-            nome : nome,
-            preco : preco,
-            estoque : estoque
+      function f_mostra() {
+         let nome = "<?php echo $dados['nome'] ?>";
+         let preco = "<?php echo $dados['preco'] ?>";
+         let estoque = "<?php echo $dados['estoque'] ?>";
+         let id = document.querySelector('.span1').textContent;
 
-        }, function(msg) {
+         $.post("update_produto.php", {
+            id: id,
+            nome: nome,
+            preco: preco,
+            estoque: estoque
+
+         }, function(msg) {
             alert('Confirmado com sucesso !');
             document.location.reload(true);
-        });      
-    }
+         });
+      }
 
       function f_updateProduto(id, nome, preco, estoque) {
          let id = document.getElementById('recipient-id').value;
          let nome = document.getElementById('recipient-nome').value;
          let preco = document.getElementById('recipient-preco').value;
          let estoque = document.getElementById('recipient-estoque').value;
-         
+
 
          $.post("update_produto.php", {
             id: id,
@@ -430,16 +430,16 @@ $ped = new InserirProduto;
          });
       }
    </script>
-<script language="javascript" type="text/javascript">
-function f_excluir(id) {
-        $.post("excluir_produto.php", {
-                id : id
-        }, function(msg) {
-                document.location.reload(true);
-        })       
+   <script language="javascript" type="text/javascript">
+      function f_excluir(id) {
+         $.post("excluir_produto.php", {
+            id: id
+         }, function(msg) {
+            document.location.reload(true);
+         })
 
-    }
-</script>
+      }
+   </script>
 
 </body>
 

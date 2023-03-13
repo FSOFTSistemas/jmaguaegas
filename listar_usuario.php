@@ -1,83 +1,78 @@
 <?php
-    session_start();
-    if(!isset($_SESSION['id'])) {
-       header('location: index.php');
-       exit;
-    }
+session_start();
+if (!isset($_SESSION['id'])) {
+    header('location: index.php');
+    exit;
+}
 
-    include "bd.php";
-   /* $id_usu = $_SESSION['id'];
-    $sql = "SELECT * from usuario where id ='". $_SESSION['id']."' ";
-    $usu = $PDO->prepare($sql);
-    $usu->execute();
-    $dados = $usu->fetch();
-*/
+require_once 'Conexao.php';
+
 ?>
 
 <ul>
-    <?php 
-        $consulta = $PDO->prepare("SELECT * FROM usuario");
-        $consulta->execute();
+    <?php
+    $consulta = Conexao::getInstance()->prepare("SELECT * FROM usuario");
+    $consulta->execute();
 
-        while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-       
+    while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+
     ?>
-    <li>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="people-nearby">
-                        <div class="nearby-user">
-                            <div class="row">
-                                <div class="col-md-7 col-sm-7">
-                                    <h5>Nome</h5>
-                                    <h3 id="nome"> <?php echo $linha['nome'];?></h3>
-                                    <h5>Senha</h5>
-                                    <h3 id="senha"><?php echo $linha['senha'];?></h3>
-                                    <h5>Telefone</h5>
-                                    <h3 id="telefone"><?php echo $linha['telefone'];?></h3>
+        <li>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="people-nearby">
+                            <div class="nearby-user">
+                                <div class="row">
+                                    <div class="col-md-7 col-sm-7">
+                                        <h5>Nome</h5>
+                                        <h3 id="nome"> <?php echo $linha['nome']; ?></h3>
+                                        <h5>Senha</h5>
+                                        <h3 id="senha"><?php echo $linha['senha']; ?></h3>
+                                        <h5>Telefone</h5>
+                                        <h3 id="telefone"><?php echo $linha['telefone']; ?></h3>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </li>
+        </li>
 
-    <!-- Modal -->
-    <div class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="mymodal <?php echo $linha['id']; ?> Label" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="mymodalLabel">Usuario <span class="span1" ></span></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <label for="nome1" class="control-label">Nome:</label>
-                    <textarea name="nome1" type="text" class="form-control" id="nome1"></textarea>
+        <!-- Modal -->
+        <div class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="mymodal <?php echo $linha['id']; ?> Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="mymodalLabel">Usuario <span class="span1"></span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="nome1" class="control-label">Nome:</label>
+                        <textarea name="nome1" type="text" class="form-control" id="nome1"></textarea>
 
-                    <label for="senha1" class="control-label">Senha:</label>
-                    <textarea name="senha1" type="text" class="form-control" id="senha1"></textarea>
+                        <label for="senha1" class="control-label">Senha:</label>
+                        <textarea name="senha1" type="text" class="form-control" id="senha1"></textarea>
 
-                    <label for="telefone1" class="control-label">Telefone:</label>
-                    <textarea name="telefone1" type="text" class="form-control" id="telefone1"></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary delet" data-dismiss="modal" onclick="f_deletar()">Excluir</button>
-                    <button type="button" class="btn btn-secondary" onclick="f_updateUsuario()" >Alterar</button>
-                   <!-- <button type="button" class="btn btn-primary entreg" onclick="f_mostra()">Confirmar</button> -->
+                        <label for="telefone1" class="control-label">Telefone:</label>
+                        <textarea name="telefone1" type="text" class="form-control" id="telefone1"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary delet" data-dismiss="modal" onclick="f_deletar()">Excluir</button>
+                        <button type="button" class="btn btn-secondary" onclick="f_updateUsuario()">Alterar</button>
+                        <!-- <button type="button" class="btn btn-primary entreg" onclick="f_mostra()">Confirmar</button> -->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- fim modal -->
-    <div class = "a"></div>
-    
-    <?php } ?>   
+        <!-- fim modal -->
+        <div class="a"></div>
+
+    <?php } ?>
 
 </ul>
 
@@ -91,7 +86,7 @@
 <script src="js/custom.js"></script>
 
 <script type="text/javascript">
-    $('#MyModal').on('show.bs.modal', function (event) {
+    $('#MyModal').on('show.bs.modal', function(event) {
         let button = $(event.relatedTarget);
         let id = button.data('id');
         let nome = button.data('nome');
@@ -107,7 +102,7 @@
     });
 </script>
 <script language="javascript" type="text/javascript">
-   /* function f_mostra() {
+    /* function f_mostra() {
         let nome = "<?php echo $dados['nome'] ?>";
         let id = document.querySelector('.span1').textContent;
     
@@ -129,24 +124,23 @@
         let id = document.querySelector('.span1').textContent;
 
         $.post("update_usuario.php", {
-                id : id,
-                nome : nome,
-                senha : senha,
-                telefone : telefone
+            id: id,
+            nome: nome,
+            senha: senha,
+            telefone: telefone
         }, function(msg) {
-                document.location.reload(true);
-        });   
+            document.location.reload(true);
+        });
     }
 
     function f_deletar() {
         let id = document.querySelector('.span1').textContent;
-        
+
         $.post("delete_usuario.php", {
-                id : id
+            id: id
         }, function(msg) {
-                document.location.reload(true);
-        })       
+            document.location.reload(true);
+        })
 
     }
 </script>
-

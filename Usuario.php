@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "bd.php";
+require_once 'Conexao.php';
 require_once 'insertUsuario.php';
 $ped = new InserirUsuario;
 ?>
@@ -165,48 +165,48 @@ $ped = new InserirUsuario;
                               </tr>
                            </thead>
                            <tbody>
-                           <?php
-                           $consulta = $PDO->prepare("SELECT * FROM usuario");
-                           $consulta->execute();
+                              <?php
+                              $consulta = $PDO->prepare("SELECT * FROM usuario");
+                              $consulta->execute();
 
-                           while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                              while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
 
-                           ?>
-                        
-                              <tr>
-                                 <div class="container">
-                                    <div class="row">
-                                       <div class="col-md-8">
-                                          <div class="people-nearby">
-                                             <div class="nearby-user">
-                                                <div class="row">
-                                                   <div class="col-lg-12 col-sm-12">
-                                                      <td id="id"> <?php echo $linha['id']; ?></td>
-                                                     
-                                                      <td id="nome"> <?php echo $linha['nome']; ?></td>
-                                                     
-                                                      <td id="senha"><?php echo $linha['senha']; ?></td>
-                                                     
-                                                      <td id="telefone"><?php echo $linha['telefone']; ?></td>
-                                                    
-                                                      <td>
-                                                      <!-- Button trigger modal -->
-                                                      <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#MyModal2" data-whateverid="<?php echo $linha['id']; ?>" data-whatevernome="<?php echo $linha['nome']; ?>">
-                                                          Exluir</button>
-                                                         <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#exampleModal" data-whateverid="<?php echo $linha['id']; ?>" data-whatevernome="<?php echo $linha['nome']; ?>" data-whateversenha="<?php echo $linha['senha']; ?>" data-whatevertelefone="<?php echo $linha['telefone']; ?>">
-                                                         Alterar</button>
-                                                      </td>
-                                                      
+                              ?>
+
+                                 <tr>
+                                    <div class="container">
+                                       <div class="row">
+                                          <div class="col-md-8">
+                                             <div class="people-nearby">
+                                                <div class="nearby-user">
+                                                   <div class="row">
+                                                      <div class="col-lg-12 col-sm-12">
+                                                         <td id="id"> <?php echo $linha['id']; ?></td>
+
+                                                         <td id="nome"> <?php echo $linha['nome']; ?></td>
+
+                                                         <td id="senha"><?php echo $linha['senha']; ?></td>
+
+                                                         <td id="telefone"><?php echo $linha['telefone']; ?></td>
+
+                                                         <td>
+                                                            <!-- Button trigger modal -->
+                                                            <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#MyModal2" data-whateverid="<?php echo $linha['id']; ?>" data-whatevernome="<?php echo $linha['nome']; ?>">
+                                                               Exluir</button>
+                                                            <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#exampleModal" data-whateverid="<?php echo $linha['id']; ?>" data-whatevernome="<?php echo $linha['nome']; ?>" data-whateversenha="<?php echo $linha['senha']; ?>" data-whatevertelefone="<?php echo $linha['telefone']; ?>">
+                                                               Alterar</button>
+                                                         </td>
+
+                                                      </div>
                                                    </div>
                                                 </div>
                                              </div>
                                           </div>
                                        </div>
                                     </div>
-                                 </div>
-                           </tr>
-                              </tbody>
-                           <?php } ?>
+                                 </tr>
+                           </tbody>
+                        <?php } ?>
 
                      </div>
                   </div>
@@ -215,9 +215,9 @@ $ped = new InserirUsuario;
          </div>
       </div>
    </div>
-    
-    <!-- Modal -->
-    <div class="modal fade" id="MyModal2" role="dialog" aria-labelledby="mymodal" aria-hidden="true">
+
+   <!-- Modal -->
+   <div class="modal fade" id="MyModal2" role="dialog" aria-labelledby="mymodal" aria-hidden="true">
       <div class="modal-dialog" role="document">
          <div class="modal-content">
             <div class="modal-header">
@@ -227,17 +227,17 @@ $ped = new InserirUsuario;
                </button>
             </div>
             <div class="modal-body">
-            <form method="POST" action="excluir_usuario.php" enctype="multipart/form-data">
-               <div class="form-group">
-               <label for="recipient-nome" class="control-label">Nome:</label>
-               <input name="nome" type="text" class="form-control" id="recipient-nome">
-               </div>
-               <input name="id" type="hidden" id="id_usuario">
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button><br></br>
-                  <button type="submit" class="btn btn-primary" name="btn_excluir">Sim, Desejo Excluir!</button>
-               </div>
-              </form>
+               <form method="POST" action="excluir_usuario.php" enctype="multipart/form-data">
+                  <div class="form-group">
+                     <label for="recipient-nome" class="control-label">Nome:</label>
+                     <input name="nome" type="text" class="form-control" id="recipient-nome">
+                  </div>
+                  <input name="id" type="hidden" id="id_usuario">
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button><br></br>
+                     <button type="submit" class="btn btn-primary" name="btn_excluir">Sim, Desejo Excluir!</button>
+                  </div>
+               </form>
             </div>
          </div>
       </div>
@@ -245,39 +245,39 @@ $ped = new InserirUsuario;
 
    </table>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Usuario</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form method="POST" action="update_usuario.php" enctype="multipart/form-data">
-          <div class="form-group">
-            <label for="recipient-nome" class="control-label">Nome:</label>
-            <input name="nome" type="text" class="form-control" id="recipient-nome">
-          </div>
-          <div class="form-group">
-            <label for="recipient-senha" class="control-label">Senha:</label>
-            <input name="senha" type="text" class="form-control" id="recipient-senha">
-          </div>
-          <div class="form-group">
-            <label for="recipient-telefone" class="control-label">Telefone:</label>
-            <input name="telefone" type="text" class="form-control" id="recipient-telefone">
-          </div>
-          <input name="id" type="hidden" id="id_usuario">
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-danger">Alterar</button>
+   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Usuario</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <form method="POST" action="update_usuario.php" enctype="multipart/form-data">
+                  <div class="form-group">
+                     <label for="recipient-nome" class="control-label">Nome:</label>
+                     <input name="nome" type="text" class="form-control" id="recipient-nome">
+                  </div>
+                  <div class="form-group">
+                     <label for="recipient-senha" class="control-label">Senha:</label>
+                     <input name="senha" type="text" class="form-control" id="recipient-senha">
+                  </div>
+                  <div class="form-group">
+                     <label for="recipient-telefone" class="control-label">Telefone:</label>
+                     <input name="telefone" type="text" class="form-control" id="recipient-telefone">
+                  </div>
+                  <input name="id" type="hidden" id="id_usuario">
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+                     <button type="submit" class="btn btn-danger">Alterar</button>
+                  </div>
+               </form>
+            </div>
          </div>
-        </form>
       </div>
-    </div>
-  </div>
-</div>
+   </div>
 
    <!-- fashion section end  action="update_usuario.php" enctype="multipart/form-data" -->
    <!-- footer section start -->
@@ -319,38 +319,38 @@ $ped = new InserirUsuario;
    </script>
 
 
-<script type="text/javascript">
-      $('#MyModal2').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var recipientid = button.data('whateverid')
-  var recipientnome = button.data('whatevernome')
-  
+   <script type="text/javascript">
+      $('#MyModal2').on('show.bs.modal', function(event) {
+         var button = $(event.relatedTarget) // Button that triggered the modal
+         var recipientid = button.data('whateverid')
+         var recipientnome = button.data('whatevernome')
 
-  var modal = $(this)
-  modal.find('.modal-title').text('Usuario ' + recipientnome)
-  modal.find('#id_usuario').val(recipientid)
-  modal.find('#recipient-nome').val(recipientnome)
-})
+
+         var modal = $(this)
+         modal.find('.modal-title').text('Usuario ' + recipientnome)
+         modal.find('#id_usuario').val(recipientid)
+         modal.find('#recipient-nome').val(recipientnome)
+      })
    </script>
 
 
 
 
    <script type="text/javascript">
-      $('#exampleModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var recipientid = button.data('whateverid')
-  var recipientnome = button.data('whatevernome')
-  var recipientsenha = button.data('whateversenha') 
-  var recipienttelefone = button.data('whatevertelefone') 
+      $('#exampleModal').on('show.bs.modal', function(event) {
+         var button = $(event.relatedTarget) // Button that triggered the modal
+         var recipientid = button.data('whateverid')
+         var recipientnome = button.data('whatevernome')
+         var recipientsenha = button.data('whateversenha')
+         var recipienttelefone = button.data('whatevertelefone')
 
-  var modal = $(this)
-  modal.find('.modal-title').text('Usuario ' + recipientnome)
-  modal.find('#id_usuario').val(recipientid)
-  modal.find('#recipient-nome').val(recipientnome)
-  modal.find('#recipient-senha').val(recipientsenha)
-  modal.find('#recipient-telefone').val(recipienttelefone)
-})
+         var modal = $(this)
+         modal.find('.modal-title').text('Usuario ' + recipientnome)
+         modal.find('#id_usuario').val(recipientid)
+         modal.find('#recipient-nome').val(recipientnome)
+         modal.find('#recipient-senha').val(recipientsenha)
+         modal.find('#recipient-telefone').val(recipienttelefone)
+      })
    </script>
    <!--
 <script>
@@ -395,30 +395,30 @@ $ped = new InserirUsuario;
       });
    </script>
    <script language="javascript" type="text/javascript">
-       function f_mostra() {
-        let nome = "<?php echo $dados['nome'] ?>";
-        let senha = "<?php echo $dados['senha'] ?>";
-        let telefone = "<?php echo $dados['telefone'] ?>";
-        let id = document.querySelector('.span1').textContent;
-    
-        $.post("update_usuario.php", {
-            id : id,
-            nome : nome,
-            senha : senha,
-            telefone : telefone
+      function f_mostra() {
+         let nome = "<?php echo $dados['nome'] ?>";
+         let senha = "<?php echo $dados['senha'] ?>";
+         let telefone = "<?php echo $dados['telefone'] ?>";
+         let id = document.querySelector('.span1').textContent;
 
-        }, function(msg) {
+         $.post("update_usuario.php", {
+            id: id,
+            nome: nome,
+            senha: senha,
+            telefone: telefone
+
+         }, function(msg) {
             alert('Confirmado com sucesso !');
             document.location.reload(true);
-        });      
-    }
+         });
+      }
 
       function f_updateUsuario(id, nome, senha, telefone) {
          let id = document.getElementById('recipient-id').value;
          let nome = document.getElementById('recipient-nome').value;
          let senha = document.getElementById('recipient-senha').value;
          let telefone = document.getElementById('recipient-telefone').value;
-         
+
 
          $.post("update_usuario.php", {
             id: id,
@@ -430,16 +430,16 @@ $ped = new InserirUsuario;
          });
       }
    </script>
-<script language="javascript" type="text/javascript">
-function f_excluir(id) {
-        $.post("excluir_usuario.php", {
-                id : id
-        }, function(msg) {
-                document.location.reload(true);
-        })       
+   <script language="javascript" type="text/javascript">
+      function f_excluir(id) {
+         $.post("excluir_usuario.php", {
+            id: id
+         }, function(msg) {
+            document.location.reload(true);
+         })
 
-    }
-</script>
+      }
+   </script>
 
 </body>
 

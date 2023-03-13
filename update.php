@@ -1,6 +1,6 @@
 <?php
 
-include "bd.php";
+require_once 'Conexao.php';
 
 $id = $_POST['id'];
 $nome = $_POST['nome'];
@@ -12,10 +12,7 @@ $data_atual = new DateTime('now', $timezone);
 $data_atual = $data_atual->format('Y-m-d');
 
 try {
-        $usuario = "u114975982_kikogasbd";
-        $senha = "Benicio01";
-        $pdo = new PDO('mysql:host=127.0.0.1;dbname=u114975982_kikogasbd', $usuario, $senha);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo = Conexao::getInstance();
         //preparo minha query JLC
         $query = $pdo->prepare('select COUNT(id) from Entrega where entregador = :nome and data like :dt');
         $query->execute(array(
@@ -41,4 +38,3 @@ try {
 
   echo 'Error: ' . $e->getMessage();
 }
-?>

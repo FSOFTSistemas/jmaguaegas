@@ -189,6 +189,11 @@ if(isset($_POST['Entregador'])){
                                                                     <h5>Pedido - entregador: <?php echo $linha['entregador']; ?> <?php echo date("d-m-Y", strtotime($linha['data'])); ?></h5>
                                                                     <h3 id="descricao"><?php echo $linha['descricao']; ?></h3>
                                                                 </div>
+                                                                <div class="col-md-3 col-sm-3">
+                                                                    <br>
+                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                    <a class="btn btn-success" style="color:white" target="_blank" href="cupom.php?id=<?php echo $linha['id'] ?>">Imprimir</a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

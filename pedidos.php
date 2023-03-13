@@ -1,13 +1,13 @@
 <?php
 session_start();
-if(!isset($_SESSION['id'])){
+if (!isset($_SESSION['id'])) {
    header('location: index.php');
    exit;
 }
 
-include "bd.php";
+require_once 'Conexao.php';
 $id_usu = $_SESSION['id'];
-$sql = "SELECT * from usuario where id ='". $_SESSION['id']."' ";
+$sql = "SELECT * from usuario where id ='" . $_SESSION['id'] . "' ";
 $usu = $PDO->prepare($sql);
 $usu->execute();
 $dados = $usu->fetch();
@@ -15,6 +15,7 @@ $dados = $usu->fetch();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
    <!-- basic -->
    <meta charset="utf-8">
@@ -26,7 +27,7 @@ $dados = $usu->fetch();
    <meta name="keywords" content="">
    <meta name="description" content="">
    <meta name="author" content="F-SOFT">
-   
+
    <title>Kiko - Pedidos</title>
 
    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -52,23 +53,26 @@ $dados = $usu->fetch();
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
 
    <style type="text/css">
-      .titulo{
+      .titulo {
          margin: 0;
          position: absolute;
          left: 50%;
          margin-right: -50%;
-         transform: translate(-50%, -50%) 
+         transform: translate(-50%, -50%)
       }
-      .item{
+
+      .item {
          font-weight: bold;
          color: green;
       }
-      .a{
-            width: 100%;
-            height: 5px;
-            background-color: lightgray;
-         }
-      .b{
+
+      .a {
+         width: 100%;
+         height: 5px;
+         background-color: lightgray;
+      }
+
+      .b {
          width: 100%;
          height: 2px;
          background-color: lightgray;
@@ -76,6 +80,7 @@ $dados = $usu->fetch();
    </style>
 
 </head>
+
 <body>
    <!-- banner bg main start -->
    <div class="banner_bg_main">
@@ -95,7 +100,7 @@ $dados = $usu->fetch();
             </div>
          </div>
       </div>
-      
+
       <!-- header top section start -->
       <!-- logo section start -->
       <div class="logo_section">
@@ -107,7 +112,7 @@ $dados = $usu->fetch();
             </div>
          </div>
       </div>
-      
+
       <!-- header top section start -->
       <!-- header section start -->
       <div class="header_section">
@@ -123,14 +128,14 @@ $dados = $usu->fetch();
                <div class="dropdown">
                   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ENTREGADORES</button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <ul>
-                     <?php
+                     <ul>
+                        <?php
                         $consulta_entregador = $PDO->prepare("SELECT * FROM Entrega GROUP by entregador");
                         $consulta_entregador->execute();
-                        while ($entregador= $consulta_entregador->fetch(PDO::FETCH_ASSOC)) { 
-                     ?>
-                     <li><a class="dropdown-item" href="#"><?php echo $entregador['entregador'];?></a></li>
-                     <?php } ?>
+                        while ($entregador = $consulta_entregador->fetch(PDO::FETCH_ASSOC)) {
+                        ?>
+                           <li><a class="dropdown-item" href="#"><?php echo $entregador['entregador']; ?></a></li>
+                        <?php } ?>
                      </ul>
                   </div>
                </div>
@@ -139,104 +144,103 @@ $dados = $usu->fetch();
       </div>
    </div>
 
-    <!-- header section end -->
-    
+   <!-- header section end -->
+
    <div class="container">
-   <div class="fashion_section_2">
-      <div class="row">
-      
-         <div class="col-lg-12 col-sm-12">
-         
-            <div class="box_main">
-               <!-- Lista de pedidos section start -->
-            
-                    <ul>
-                        <?php 
-                        if($dados['nome'] == 'admin'){
-                            $consulta = $PDO->prepare("SELECT entregador FROM Entrega GROUP by entregador");
-                        }else{
-                           $consulta = $PDO->prepare("SELECT entregador FROM Entrega where entregador like '".$dados['nome']."'");
-                        }
-                            $consulta->execute();
-                            while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) { 
-                        ?>
-                            <li>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="people-nearby">
-                                                <div class="nearby-user">
-                                                    <div class="row">
-                                                        <div class="col-md-7 col-sm-7">
-                                                            <h2 class="item">Entregador: <?php echo "<span style='color:orange;'> ".$linha['entregador']."</span>"; ?></h2>
-                                                            <div class="a"></div>
-                                                            
-                                                        </div>
-                                                        <ul>
-                                                               <?php 
-                                                               if($linha['entregador'] == 'admin'){
-                                                                  $consulta1 = $PDO->prepare("SELECT * FROM Entrega where entregador <> '' ");
-                                                               }else{
-                                                                  $consulta1 = $PDO->prepare("SELECT * FROM Entrega where entregador like '".$linha['entregador']."' ");
-                                                               }
-                                                               
-                                                               $consulta1->execute();
-                                                               while ($linha1 = $consulta1->fetch(PDO::FETCH_ASSOC)) 
-                                                                  { ?>
-                                                               <li>
-                                                                  <div class="container">
+      <div class="fashion_section_2">
+         <div class="row">
+
+            <div class="col-lg-12 col-sm-12">
+
+               <div class="box_main">
+                  <!-- Lista de pedidos section start -->
+
+                  <ul>
+                     <?php
+                     if ($dados['nome'] == 'admin') {
+                        $consulta = $PDO->prepare("SELECT entregador FROM Entrega GROUP by entregador");
+                     } else {
+                        $consulta = $PDO->prepare("SELECT entregador FROM Entrega where entregador like '" . $dados['nome'] . "'");
+                     }
+                     $consulta->execute();
+                     while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                     ?>
+                        <li>
+                           <div class="container">
+                              <div class="row">
+                                 <div class="col-md-8">
+                                    <div class="people-nearby">
+                                       <div class="nearby-user">
+                                          <div class="row">
+                                             <div class="col-md-7 col-sm-7">
+                                                <h2 class="item">Entregador: <?php echo "<span style='color:orange;'> " . $linha['entregador'] . "</span>"; ?></h2>
+                                                <div class="a"></div>
+
+                                             </div>
+                                             <ul>
+                                                <?php
+                                                if ($linha['entregador'] == 'admin') {
+                                                   $consulta1 = $PDO->prepare("SELECT * FROM Entrega where entregador <> '' ");
+                                                } else {
+                                                   $consulta1 = $PDO->prepare("SELECT * FROM Entrega where entregador like '" . $linha['entregador'] . "' ");
+                                                }
+
+                                                $consulta1->execute();
+                                                while ($linha1 = $consulta1->fetch(PDO::FETCH_ASSOC)) { ?>
+                                                   <li>
+                                                      <div class="container">
+                                                         <div class="row">
+                                                            <div class="col-md-8">
+                                                               <div class="people-nearby">
+                                                                  <div class="nearby-user">
                                                                      <div class="row">
-                                                                        <div class="col-md-8">
-                                                                           <div class="people-nearby">
-                                                                              <div class="nearby-user">
-                                                                                 <div class="row">
-                                                                                 <div class="col-md-2 col-sm-2">
-                                                                                          <img src="images/entrega.png" class="profile-photo-lg">
-                                                                                    </div>
-                                                                                    <div class="col-md-7 col-sm-7">
-                                                                                          <h3 id="descricao"><?php echo $linha1['descricao']; ?></h3>
-                                                                                    </div>
-                                                                                 </div>
-                                                                              </div>
-                                                                           </div>
+                                                                        <div class="col-md-2 col-sm-2">
+                                                                           <img src="images/entrega.png" class="profile-photo-lg">
+                                                                        </div>
+                                                                        <div class="col-md-7 col-sm-7">
+                                                                           <h3 id="descricao"><?php echo $linha1['descricao']; ?></h3>
                                                                         </div>
                                                                      </div>
                                                                   </div>
-                                                               </li>
-                                                               <div class="b"></div>
-                                                           <?php } ?>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </li>
+                                                   <div class="b"></div>
+                                                <?php } ?>
+                                             </ul>
+                                          </div>
+                                       </div>
                                     </div>
-                                </div>
-                            </li>                    
-                        <?php } ?>      
-                    </ul>
-                </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                     <?php } ?>
+                  </ul>
+               </div>
             </div>
-        </div>
-    </div>
-    </div>
-   
-    <!-- fashion section end -->
+         </div>
+      </div>
+   </div>
 
-  
-      <!-- footer section start -->
-      <div class="footer_section layout_padding">
-         <div class="container">
-            <div class="footer_logo"><a href="home.html"><img src="images/footer-logo.png"></a></div>
-         </div>
+   <!-- fashion section end -->
+
+
+   <!-- footer section start -->
+   <div class="footer_section layout_padding">
+      <div class="container">
+         <div class="footer_logo"><a href="home.html"><img src="images/footer-logo.png"></a></div>
       </div>
-      <!-- footer section end -->
-      <!-- copyright section start -->
-      <div class="copyright_section">
-         <div class="container">
-            <p class="copyright_text">© 2021 All Rights Reserved. Design by<a href="https://f-softsistemas.com.br">FSOFT sistemas</a></p>
-         </div>
+   </div>
+   <!-- footer section end -->
+   <!-- copyright section start -->
+   <div class="copyright_section">
+      <div class="container">
+         <p class="copyright_text">© 2021 All Rights Reserved. Design by<a href="https://f-softsistemas.com.br">FSOFT sistemas</a></p>
       </div>
+   </div>
 
    <!-- copyright section end -->
    <!-- Javascript files-->
@@ -252,7 +256,7 @@ $dados = $usu->fetch();
       function openNav() {
          document.getElementById("mySidenav").style.width = "250px";
       }
-        
+
       function closeNav() {
          document.getElementById("mySidenav").style.width = "0";
       }
@@ -264,4 +268,5 @@ $dados = $usu->fetch();
    </script>
 
 </body>
+
 </html>
