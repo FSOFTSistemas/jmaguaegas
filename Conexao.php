@@ -3,8 +3,8 @@ $usuario = "u114975982_jmaguaegas";
 $senha = "Benicio01"; -->
 
 <?php
-/*  
-  * Constantes de parâmetros para configuração da conexão  
+/*
+  * Constantes de parâmetros para configuração da conexão
   */
 define('HOST', 'localhost');
 define('DBNAME', 'jmaguaegas');
@@ -15,22 +15,22 @@ define('PASSWORD', '');
 class Conexao
 {
 
-    /*  
-    * Atributo estático para instância do PDO  
+    /*
+    * Atributo estático para instância do PDO
     */
     private static $pdo;
 
-    /*  
-    * Escondendo o construtor da classe  
+    /*
+    * Escondendo o construtor da classe
     */
     private function __construct()
     {
-        //  
+        //
     }
 
-    /*  
-    * Método estático para retornar uma conexão válida  
-    * Verifica se já existe uma instância da conexão, caso não, configura uma nova conexão  
+    /*
+    * Método estático para retornar uma conexão válida
+    * Verifica se já existe uma instância da conexão, caso não, configura uma nova conexão
     */
     public static function getInstance()
     {
