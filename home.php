@@ -26,7 +26,7 @@ $dados = $usu->fetch();
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>KIKO ÁGUA/GÁS</title>
+      <title>JM ÁGUA E GÁS</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
  
@@ -88,15 +88,15 @@ $dados = $usu->fetch();
                      <div class="custom_menu">
                         <ul>
                            <li><a href="#">INICIO</a></li>
-                           <li><a href="cadastro.php">CADASTRAR PEDIDO</a></li>
+                           <li><a href="cadastro.php">NOVO PEDIDO</a></li>
                            <?php
                               if($dados['nome'] == 'admin'){?>
-                                 <li><a href="Produto.php">CADASTRAR PRODUTO</a></li>
-                                 <li><a href="Usuario.php">CADASTRAR USUARIO</a></li>
+                                 <li><a href="Produto.php">PRODUTOS</a></li>
+                                 <li><a href="Usuario.php">USUÁRIOS</a></li>
                            <?php
                                }
                             ?>
-                           
+                           <li><a href="vendas.php">CONTROLE DE VENDAS</a></li>
                            <li><a href="pedidos1.php">PEDIDOS</a></li>
                            <li><a href="#">Usuario logado:   <?php echo  $dados['nome'] ?></a></li>
                            <li><a href="sair.php">Sair</a></li>
@@ -112,7 +112,7 @@ $dados = $usu->fetch();
             <div class="container">
                <div class="row">
                   <div class="col-sm-12">
-                     <div class="logo"><a href="home.html"><img src="images/logo.png"></a></div>
+                     <div class="logo"><a href="home.html"><img src="images/JM.png" width="180px"></a></div>
                   </div>
                </div>
             </div>
@@ -125,14 +125,15 @@ $dados = $usu->fetch();
                   <div id="mySidenav" class="sidenav">
                      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                      <a href="home.php">INICIO</a>
-                     <a href="cadastro.php">CADASTRAR PEDIDO</a>
+                     <a href="cadastro.php">NOVO PEDIDO</a>
                      <?php
                         if($dados['nome'] == 'admin'){?>
-                     <a href="Produto.php">CADASTRAR PRODUTO</a>
-                     <a href="Usuario.php">CADASTRAR USUARIO</a>
+                     <a href="Produto.php">PRODUTOS</a>
+                     <a href="Usuario.php">USUARIOS</a>
                      <?php
                                     }
                         ?>
+                     <a href="vendas.php">CONTROLE DE VENDAS</a>
                      <a href="pedidos1.php">PEDIDOS</a>
                      <a href="sair.php">Sair</a>
                   </div>
@@ -155,7 +156,7 @@ $dados = $usu->fetch();
                      <div class="input-group">
                         <input type="text" class="form-control" placeholder="Pesquisar entrega por descrição">
                         <div class="input-group-append">
-                           <button class="btn btn-secondary" type="button" style="background-color: #f26522; border-color:#f26522 ">
+                           <button class="btn btn-secondary" type="button" style="background-color: #5F9EA0; border-color:#5F9EA0 ">
                            <i class="fa fa-search"></i>
                            </button>
                         </div>
@@ -230,7 +231,7 @@ $dados = $usu->fetch();
       <!-- footer section start -->
       <div class="footer_section layout_padding">
          <div class="container">
-            <div class="footer_logo"><a href="home.html"><img src="images/footer-logo.png"></a></div>
+            <div class="footer_logo"><center><a href="home.html"><img src="images/JM.png" width="90px" ></a></center></div>
          </div>
       </div>
       <!-- footer section end -->

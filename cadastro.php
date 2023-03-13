@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+include "bd.php";
 require_once 'insertPedido.php';
 $ped = new InserirPedido;
 ?>
@@ -17,7 +18,7 @@ $ped = new InserirPedido;
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
    <!-- site metas -->
-   <title>KIKO ÁGUA/GÁS</title>
+   <title>JM ÁGUA E GÁS</title>
    <meta name="keywords" content="">
    <meta name="description" content="">
    <meta name="author" content="">
@@ -43,6 +44,11 @@ $ped = new InserirPedido;
    <link rel="stylesheet" href="css/owl.carousel.min.css">
    <link rel="stylesoeet" href="css/owl.theme.default.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+   <link  rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"  crossorigin="anonymous">
+   
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -70,7 +76,7 @@ $ped = new InserirPedido;
          <div class="container">
             <div class="row">
                <div class="col-sm-12">
-                  <div class="logo"><a href="home.php"><img src="images/logo.png"></a></div>
+                  <div class="logo"><a href="home.php"><img src="images/JM.png" width="180px"></a></div>
                </div>
             </div>
          </div>
@@ -114,28 +120,94 @@ $ped = new InserirPedido;
             <div class="fashion_section_2">
                <div class="container">
                   <h2>Pedido</h2>
-                  <!-- <form action="/action_page.php">
-                     <input type="checkbox" id="agua" name="agua" value="agua">
-                     <label for="vehicle1"> Água</label><br>
-                     <input type="checkbox" id="agranel" name="agranel" value="agranel">
-                     <label for="vehicle2"> Agranel</label><br>
-                     <input type="checkbox" id="gas" name="gas" value="gas">
-                     <label for="vehicle3"> Gás</label><br><br>
-                  </form> -->
                   <form method="POST">
+                      
+                      <div class="form-group">
+                          <label for="sel1" class="form-label">Produto</label>
+                            <select class="form-select" id="prod" name="prod">
+                              <option selected>Selecione o produto</option>
+                              
+                              <?php
+                                $consulta = $PDO->query("SELECT * FROM Produto;");
+                                
+                                while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) { ?>
+                                      <option value="<?php echo $linha['id']; ?>" name="prod" id="prod"><?php echo $linha['nome']; ?></option> 
+                             <?php } ?>
+                            </select>
+                            <br>
+                    </div>
+                   <div class="form-group">
+                      <label for="usr">Quantidade:</label>
+                      <input type="number" class="form-control" id="qtde" name="qtde">
+                    </div>
+                    <hr/>
+                    <!--Produto 2-->
+                    <div class="form-group">
+                    <div hidden="hidden" id="produto2">
+                    <label for="sel1"  class="form-label">Produto 2</label>
+                      <select  class="form-select" id="prod2"  name="prod2">
+                              <option selected>Selecione o produto</option>
+                              
+                              <?php
+                                $consulta = $PDO->query("SELECT * FROM Produto;");
+                                
+                                while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) { ?>
+                                      <option value="<?php echo $linha['id']; ?>" name="prod2" id="prod2"><?php echo $linha['nome']; ?></option> 
+                             <?php } ?>
+                            </select>
+                            <br>
+                       <div class="form-group">
+                          <label for="usr"  >Quantidade:</label>
+                          <input type="number"  class="form-control" id="qtde2" name="qtde2">
+                        </div> 
+                    </div>
+                    <!--Produto 2-->
+                   
+                    <!--Produto 3-->
+                    <div hidden="hidden" id="produto3">
+                    <hr/>
+                    <div class="form-group">
+                        <label for="sel1"  class="form-label">Produto 3</label>
+                      <select  class="form-select" id="prod3"  name="prod3">
+                              <option selected>Selecione o produto</option>
+                              
+                              <?php
+                                $consulta = $PDO->query("SELECT * FROM Produto;");
+                                
+                                while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) { ?>
+                                      <option value="<?php echo $linha['id']; ?>" name="prod3" id="prod3"><?php echo $linha['nome']; ?></option> 
+                             <?php } ?>
+                            </select>
+                            <br>
+                    </div>
+                   <div class="form-group">
+                      <label for="usr"  >Quantidade:</label>
+                      <input type="number"  class="form-control" id="qtde3" name="qtde3">
+                    </div> 
+                    </div>
+                    <!--Produto 3-->
+                    <button type="button" class="btn btn-success" onclick="toggle(this)">+</button><br><br>
                      <div class="form-group">
                         <label for="descricao">Descrição</label>
                         <textarea type="text" class="form-control" name="descricao" id="descricao" placeholder="Digite aqui o pedido" name="descricao"></textarea>
                      </div>
+                     
+                     
                      <button type="submit" class=" enviar btn btn-primary">
                         Enviar
                      </button>
                      <?php
                      if (isset($_POST['descricao'])) {
                         $desc = addslashes($_POST['descricao']);
+                        $qtde = addslashes($_POST['qtde']);
+                        $prod = addslashes($_POST['prod']);
+                        $qtde2 = addslashes($_POST['qtde2']);
+                        $prod2 = addslashes($_POST['prod2']);
+                        $qtde3 = addslashes($_POST['qtde3']);
+                        $prod3 = addslashes($_POST['prod3']);
 
                         if (!empty($desc)) {
-                           if ($ped->inserir($desc)) {
+                           if ($ped->inserir($desc, $qtde, $prod, $qtde2, $prod2,  $qtde3, $prod3)) {
                               echo "<strong><font color=\"#008000\">Pedido Inserido com sucesso !</strong>";
                               //header('Location: cadastro.php');
                            } else {
@@ -158,14 +230,14 @@ $ped = new InserirPedido;
    <!-- footer section start -->
    <div class="footer_section layout_padding">
       <div class="container">
-         <div class="footer_logo"><a href="home.php"><img src="images/footer-logo.png"></a></div>
+         <div class="footer_logo"><a href="home.php"><img src="images/JM.png" width="90px"></a></div>
       </div>
    </div>
    <!-- footer section end -->
    <!-- copyright section start -->
    <div class="copyright_section">
       <div class="container">
-         <p class="copyright_text">© 2021 All Rights Reserved. Design by <a href="https://html.design">FSOFT Sistmas.</a></p>
+         <p class="copyright_text">© 2021 All Rights Reserved. Design by <a href="https://f-softsistemas.com.br/">FSOFT Sistemas.</a></p>
       </div>
    </div>
    <!-- copyright section end -->
@@ -175,6 +247,9 @@ $ped = new InserirPedido;
    <script src="js/bootstrap.bundle.min.js"></script>
    <script src="js/jquery-3.0.0.min.js"></script>
    <script src="js/plugin.js"></script>
+   <script  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"  crossorigin="anonymous"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"  integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"  crossorigin="anonymous"></script>
+<script  src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"  integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"  crossorigin="anonymous"></script>
    <!-- sidebar -->
    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
    <script src="js/custom.js"></script>
@@ -192,6 +267,21 @@ $ped = new InserirPedido;
          window.location.href = 'index.html';
       }
    </script>
+  <script>
+  let toggle = button => {
+    let element = document.getElementById("produto2");
+    let hidden = element.getAttribute("hidden");
+
+    if (hidden) {
+       element.removeAttribute("hidden");
+    } else {
+       let element3 = document.getElementById("produto3");
+       let hidden3 = element.getAttribute("hidden");
+       
+       element3.removeAttribute("hidden");
+    }
+  }
+</script>
 
 </body>
 

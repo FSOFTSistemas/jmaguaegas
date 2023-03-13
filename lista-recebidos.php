@@ -29,6 +29,10 @@ $dados = $usu->fetch();
     $consulta->execute();
 
     while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+        $temp = $linha['id_produto'];
+        $prod = $PDO->query("SELECT nome FROM Produto where id = $temp");
+        $prod->execute();
+        $prod = $prod->fetch();
     ?>
 
         <li>
@@ -39,7 +43,7 @@ $dados = $usu->fetch();
                             <div class="nearby-user">
                                 <div class="row">
                                     <div class="col-md-2 col-sm-2">
-                                        <img src="images/entrega.png" class="profile-photo-lg">
+                                        <img src="images/JM.png" width="40px" class="profile-photo-lg">
                                         <h6 style="color: black; font-weight: bold; text-align: center;">Pedido: <?php echo $linha['numpedido'] ?></h6>
                                     </div>
                                     <div class="col-md-7 col-sm-7">
@@ -47,6 +51,7 @@ $dados = $usu->fetch();
                                             <?php echo "<span style='color:green; 'font-weight: bold;>" . $linha['entregador'] . "</span>" ?>
                                             <?php echo "<span style='color:rgb(134, 130, 130); 'font-weight: bold;>" . date("d-m-Y H:i:s", strtotime($linha['data']));
                                             "</span>" ?></h5>
+                                        <h4 id="produto" style="font-weight: bold;"><?php echo $linha['qtde']; ?> - <?php echo $prod['nome']; ?></h4>
                                         <h3><a href="Tel:<?php echo getNumber($linha['descricao']); ?>"><?php echo $linha['descricao'] ?></a></h3>
                                         <!--<button type="button" class="btn" name="btn_excluir" id="id" onclick="f_excluir(<?php echo $linha['id'] ?>)">Excluir</button>-->
                                         <?php
